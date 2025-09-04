@@ -14,7 +14,10 @@ descripcion = Column(text,nullable=true)
     stock = Column(Integer,default = 0, nullable=False)
 activo = Column(boolean, default=true, nullable=false)
     tipo = Column(String, nullable=False)  # 'coleccionable', 'didactico', 'electronico'
-id_usuario_creacion = column(integer, foreignkey('id_usuario', nullable=false)
+id_usuario_creacion = column(integer, foreignkey('id_usuario', nullable=False)
+id_usuario_edicion = column(integer, foreignkey('id_usuario', nullable=True)
+fecha_creacion = column(integer, foreignkey('id_usuario', nullable=True, default=None))
+fecha_actualizacion = column(DateTime, default=datetime.now, onupdate=datetime.now)                             
 
     def vender(self, cantidad: int) -> str:
         if cantidad > 0 and cantidad <= self.stock:
