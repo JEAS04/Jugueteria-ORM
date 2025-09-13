@@ -1,16 +1,22 @@
 from sqlalchemy import Column, Integer, String, Float
+from UUID import UUID
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
 class Juguete(Base):
-    __tablename__ = "juguetes"
+    __tablename__ = 'juguetes'
 
-    id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String, nullable=False)
-    precio = Column(Float, nullable=False)
-    stock = Column(Integer, nullable=False)
+    id_juguete = Column(UUID, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False, index=true)
+    descripcion = Column(text,nullable=true)
+    precio = Column(Float,nullable=False)
+    stock = Column(Integer,default = 0, nullable=False)
     tipo = Column(String, nullable=False)  # 'coleccionable', 'didactico', 'electronico'
+    id_usuario_creacion = column(integer, foreignkey('id_usuario', nullable=False)
+    id_usuario_edicion = column(integer, foreignkey('id_usuario', nullable=True)
+    fecha_creacion = column(integer, foreignkey('id_usuario', nullable=True, default=None))
+    fecha_actualizacion = column(DateTime, default=datetime.now, onupdate=datetime.now)                             
 
     def vender(self, cantidad: int) -> str:
         if cantidad > 0 and cantidad <= self.stock:
